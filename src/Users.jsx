@@ -1,10 +1,16 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState([
     { Name: "Abhishek Sardar", Email: "sardarabhishek324@gmail.com", Age: 20 },
-  ]);
+  ])
+
+  useEffect(()=>{
+    axios.get('http://localhost:3001')
+    .then(result=>)
+  })
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
