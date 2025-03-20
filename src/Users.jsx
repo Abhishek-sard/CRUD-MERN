@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Users = () => {
   const [users, setUsers] = useState([
@@ -9,8 +10,9 @@ const Users = () => {
 
   useEffect(()=>{
     axios.get('http://localhost:3001')
-    .then(result=>)
-  })
+    .then(result=>setUsers(result.data))
+    .catch(err=>console.log(err))
+  },[])
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
@@ -30,11 +32,11 @@ const Users = () => {
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
-                <td>{user.Name}</td>
-                <td>{user.Email}</td>
-                <td>{user.Age}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.age}</td>
                 <td>
-                  <Link to="/update" className="btn btn-success mb-2">
+                  <Link to={`/update/${user._id}`} className="btn btn-success mb-2">
                     Update
                   </Link>
 
