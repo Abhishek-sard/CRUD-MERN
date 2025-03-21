@@ -10,29 +10,43 @@ function UpdateUser() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/getUser/`+id)
-      .then(result => {
+    axios
+      .get(`http://localhost:3001/getUser/` + id)
+      .then((result) => {
         setName(result.data.name);
         setEmail(result.data.email);
         setAge(result.data.age);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/updateUser/${id}`, { name, email, age })
-      .then(result => {
+    axios
+      .put(`http://localhost:3001/updateUser/${id}`, { name, email, age })
+      .then((result) => {
         console.log(result);
         navigate("/");
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
+  };
+
+  const update = (e) => {
+    e.preventDefault();
+    e.preventDefault();
+    axios
+      .put("http://localhost:3001/updateUser/"+id, { name, email, age })
+      .then((result) => {
+        console.log(result);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={update}>
           <h2>Update User</h2>
           <div className="mb-2">
             <label htmlFor="name">Name</label>
@@ -64,7 +78,9 @@ function UpdateUser() {
               onChange={(e) => setAge(e.target.value)}
             />
           </div>
-          <button type="submit" className="btn btn-success">Update</button>
+          <button type="submit" className="btn btn-success">
+            Update
+          </button>
         </form>
       </div>
     </div>
